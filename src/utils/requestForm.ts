@@ -15,7 +15,7 @@ Vue.prototype.$http = axios
  * 请求拦截器
  */
 $axios.interceptors.request.use(
-  async(config) => {
+  async (config) => {
     const token = Cookies.get('form_token')
     if (config.url.includes('/api/v1/token/get_proxy_token')) {
       openLoading()
@@ -27,8 +27,8 @@ $axios.interceptors.request.use(
         return config
       } else {
         const flag = await request.getToken().then(res => {
-          var millisecond = new Date().getTime()
-          var expiresTime = new Date(millisecond + res.expires_at * 1000)
+          const millisecond = new Date().getTime()
+          const expiresTime = new Date(millisecond + res.expires_at * 1000)
           Cookies.set('form_token', res.proxy_token, {
             expires: expiresTime
           })

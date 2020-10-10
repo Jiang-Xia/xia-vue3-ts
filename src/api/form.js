@@ -3,36 +3,40 @@ import config from '@/api/config'
 let formUrl
 export default class request {
   // 获取新token
-  static getToken() {
+  static getToken () {
     return $axios.post(config.smaiformmanage_service_base_url + '/api/v1/token/get_proxy_token').then(res => {
       formUrl = res.data.proxy_url
       console.log(formUrl)
       return res.data
     })
   }
+
   // 获取医院列表
-  static getHospList() {
+  static getHospList () {
     return $axios
       .get(
         formUrl +
-          `/api/v1/form_manage/hospital_data_list`
+          '/api/v1/form_manage/hospital_data_list'
       )
       .then(res => res.data)
   }
+
   // 获取数据
-  static getField(params) {
+  static getField (params) {
     return $axios
-      .post(formUrl + `/api/v1/form_manage/data_list`, params)
+      .post(formUrl + '/api/v1/form_manage/data_list', params)
       .then(res => res.data)
   }
+
   // 导出表格数据
-  static exportExcel(params) {
+  static exportExcel (params) {
     return $axios
-      .post(formUrl + `/api/v1/form_manage/data_export`, params)
+      .post(formUrl + '/api/v1/form_manage/data_export', params)
       .then(res => res.data)
   }
+
   // 获取详情
-  static getDetail(pd_id, triage_id, hospital_id, template_id) {
+  static getDetail (pd_id, triage_id, hospital_id, template_id) {
     return $axios
       .get(
         formUrl +
@@ -40,11 +44,11 @@ export default class request {
       )
       .then(res => res.data)
   }
+
   //   保存数据
-  static saveData(params) {
+  static saveData (params) {
     return $axios
-      .patch(formUrl + `/api/v1/form_manage/data_info`, params)
+      .patch(formUrl + '/api/v1/form_manage/data_info', params)
       .then(res => res.data)
   }
 }
-

@@ -7,7 +7,7 @@ import { getCode } from '@/utils/common'
 // import Vue from 'vue'
 import { Message } from 'ant-design-vue'
 
-function errorMsg(msg:string) {
+function errorMsg (msg: string) {
   Message.error({
     message: msg,
     duration: 1500

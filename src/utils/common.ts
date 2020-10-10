@@ -5,7 +5,7 @@
 import storage from '@/utils/storage'
 
 // 获取医院代号
-export const getCode = function() {
+export const getCode = function () {
   try {
     const global_config = storage.local.get('global_config')
     const hosp_config = global_config && global_config.hosp_config
@@ -19,7 +19,7 @@ export const getCode = function() {
 }
 
 // 获取网站title
-export const getSiteTitle = function() {
+export const getSiteTitle = function () {
   try {
     const global_config = storage.local.get('global_config')
     const site_config = global_config && global_config.site_config
@@ -30,7 +30,7 @@ export const getSiteTitle = function() {
   }
 }
 // 切换路由设置title
-export function getPageTitle(pageTitle:string) {
+export function getPageTitle (pageTitle: string) {
   const title = getSiteTitle() || '数据平台'
   if (pageTitle) {
     return `${pageTitle} - ${title}`
@@ -38,7 +38,7 @@ export function getPageTitle(pageTitle:string) {
   return `${title}`
 }
 // 获取打开详情的方式
-export const getOpenType = function() {
+export const getOpenType = function () {
   try {
     const global_config = storage.local.get('global_config')
     const site_config = global_config && global_config.site_config

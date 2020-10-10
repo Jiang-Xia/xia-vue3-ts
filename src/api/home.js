@@ -5,7 +5,7 @@ import $axios from '@/utils/request'
 */
 
 /* 公共资源 接口 */
-export async function userResource(data = {}, type) {
+export async function userResource (data = {}, type) {
   const _data = {
     word: '',
     page: 1,
@@ -20,7 +20,7 @@ export async function userResource(data = {}, type) {
 }
 
 // 获取项目、科室、病种权限信息
-export async function searchKeywords(data) {
+export async function searchKeywords (data) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/quick_search',
     method: 'post',
@@ -29,7 +29,7 @@ export async function searchKeywords(data) {
 }
 
 // 获取keywordList
-export async function keywordList(params) {
+export async function keywordList (params) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/keywords_template',
     method: 'get',
@@ -38,7 +38,7 @@ export async function keywordList(params) {
 }
 
 // 导出任务
-export async function exportTask(data, method) {
+export async function exportTask (data, method) {
   if (method === 'get' || method === 'delete') {
     return $axios({
       url: config.smaiexport_service_base_url + '/api/v2/export/task',
@@ -55,7 +55,7 @@ export async function exportTask(data, method) {
 }
 
 // 获取任务列表
-export async function taskList(data) {
+export async function taskList (data) {
   return $axios({
     url: config.smaiexport_service_base_url + '/api/v2/export/task_list',
     method: 'post',
@@ -64,11 +64,10 @@ export async function taskList(data) {
 }
 
 // 导出字段联想
-export async function associationAsync(data) {
+export async function associationAsync (data) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/associate_search',
     method: 'post',
     data: data
   })
 }
-

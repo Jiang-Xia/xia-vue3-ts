@@ -2,11 +2,11 @@ import { queryTaskId, queryExportTaskId } from '@/api/originalDataList'
 import { closeLoading } from '@/utils/loading'
 import { Message } from 'element-ui'
 
-export function pollingfn(taskId) {
+export function pollingfn (taskId) {
   return new Promise((resolve, reject) => {
     let timer
     fn(taskId)
-    function fn(taskId) {
+    function fn (taskId) {
       queryTaskId(taskId).then((res) => {
         const status = res.data.status
         if (status === 0) {
@@ -23,11 +23,11 @@ export function pollingfn(taskId) {
     }
   })
 }
-export function pollingExportfn(taskId) {
+export function pollingExportfn (taskId) {
   return new Promise((resolve, reject) => {
     let timer
     fn(taskId)
-    function fn(taskId) {
+    function fn (taskId) {
       queryExportTaskId(taskId).then((res) => {
         const status = res.data.status
         if (status === 0) {

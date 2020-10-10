@@ -1,11 +1,11 @@
-(function() {
-  var baseFontSize = 20
+(function () {
+  const baseFontSize = 20
   // var baseWidth = 1916
-  var designSize = 1920
-  var set = function() {
-    var clientWidth = document.documentElement.clientWidth || window.innerWidth
+  const designSize = 1920
+  const set = function () {
+    const clientWidth = document.documentElement.clientWidth || window.innerWidth
 
-    var rem = 20
+    let rem = 20
     if (clientWidth !== designSize) {
       rem = Math.floor((clientWidth / designSize) * baseFontSize)
     }
@@ -20,4 +20,3 @@
   set()
   window.addEventListener('resize', set)
 })()
-

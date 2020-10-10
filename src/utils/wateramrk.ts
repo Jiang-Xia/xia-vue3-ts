@@ -1,8 +1,8 @@
-function watermark(waterMarkTxt:string, className:string) { // 水印
-  var watermarkdivs = []
+function watermark (waterMarkTxt: string, className: string) { // 水印
+  let watermarkdivs = []
   // 加载水印
-  var loadMark = function(settings:any) {
-    var defaultSettings = {
+  const loadMark = function (settings: any) {
+    const defaultSettings = {
       watermark_txt: waterMarkTxt,
       watermark_x: -2, // 水印起始位置x轴坐标
       watermark_y: 20, // 水印起始位置Y轴坐标
@@ -24,26 +24,26 @@ function watermark(waterMarkTxt:string, className:string) { // 水印
     }
     // 采用配置项替换默认值，作用类似jquery.extend
     if (arguments.length === 1 && typeof arguments[0] === 'object') {
-      var src = arguments[0] || {}
+      const src = arguments[0] || {}
       for (const key in src) {
         if (src[key] && defaultSettings[key] && src[key] === defaultSettings[key]) { continue } else if (src[key]) { defaultSettings[key] = src[key] }
       }
     }
 
-    var oTemp = document.createDocumentFragment()
+    const oTemp = document.createDocumentFragment()
 
     if (watermarkdivs && watermarkdivs.length > 0) {
       document.getElementsByClassName(className)[0].removeChild(document.getElementById('otdivid'))
       watermarkdivs = []
     }
-    var x
-    var y
-    for (var i = 0; i < defaultSettings.watermark_rows; i++) {
+    let x
+    let y
+    for (let i = 0; i < defaultSettings.watermark_rows; i++) {
       y = defaultSettings.watermark_y + (defaultSettings.watermark_y_space + defaultSettings.watermark_height) * i
-      for (var j = 0; j < defaultSettings.watermark_cols; j++) {
+      for (let j = 0; j < defaultSettings.watermark_cols; j++) {
         x = defaultSettings.watermark_x + (defaultSettings.watermark_width + defaultSettings.watermark_x_space) * j
 
-        var mask_div = document.createElement('div')
+        const mask_div = document.createElement('div')
         mask_div.id = '_mask_div' + i + j
         mask_div.className = '_mask_div'
         // mask_div.appendChild(document.createTextNode(defaultSettings.watermark_txt));
@@ -85,8 +85,8 @@ function watermark(waterMarkTxt:string, className:string) { // 水印
     }
   }
 
-  watermark.load = function(settings) {
-    function del() {
+  watermark.load = function (settings) {
+    function del () {
       const divs = document.querySelectorAll('._mask_div')
       for (let i = 0; i < divs.length; i++) {
         divs[i].parentNode.removeChild(divs[i])
@@ -94,11 +94,11 @@ function watermark(waterMarkTxt:string, className:string) { // 水印
       }
     }
     del()
-    window.onload = function() {
+    window.onload = function () {
       del()
       loadMark(settings)
     }
-    window.onresize = function() {
+    window.onresize = function () {
       del()
       loadMark(settings)
     }
