@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
-
+export interface AnyProp {
+  [propName: string]: string|number;
+}
 const TokenKey = 'sys_token'
 const InfoKey = 'sys_info'
 let day = '' // 一天时间
@@ -23,7 +25,7 @@ export function getInfo () {
   }
 }
 
-export function setInfo (userData: any) {
+export function setInfo (userData: AnyProp) {
   // console.log(userData);
   return Cookies.set(InfoKey, userData, { expires: day })
 }

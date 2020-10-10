@@ -14,8 +14,11 @@
     } else if (rem >= 20) {
       rem = 20
     }
-    document.querySelector('html').style.fontSize = rem + 'px'
-    window.baseFontSize = rem
+    const html = document.querySelector('html')
+    if (html) {
+      html.style.fontSize = rem + 'px'
+      window.baseFontSize = rem
+    }
   }
   set()
   window.addEventListener('resize', set)

@@ -15,3 +15,10 @@ declare module 'ant-design-vue' {
   import * as ant from 'ant-design-vue'
   export default ant
 }
+
+
+import { Config } from '@/api/interface'
+interface Window {
+  BASECONFIG: Config;
+  baseFontSize: number;
+}

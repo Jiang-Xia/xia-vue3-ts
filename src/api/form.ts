@@ -1,7 +1,7 @@
 import $axios from '@/utils/requestForm'
 import config from '@/api/config'
-let formUrl
-export default class request {
+let formUrl = ''
+export default class Request {
   // 获取新token
   static getToken () {
     return $axios.post(config.smaiformmanage_service_base_url + '/api/v1/token/get_proxy_token').then(res => {
@@ -22,21 +22,21 @@ export default class request {
   }
 
   // 获取数据
-  static getField (params) {
+  static getField (params: object) {
     return $axios
       .post(formUrl + '/api/v1/form_manage/data_list', params)
       .then(res => res.data)
   }
 
   // 导出表格数据
-  static exportExcel (params) {
+  static exportExcel (params: object) {
     return $axios
       .post(formUrl + '/api/v1/form_manage/data_export', params)
       .then(res => res.data)
   }
 
   // 获取详情
-  static getDetail (pd_id, triage_id, hospital_id, template_id) {
+  static getDetail (pd_id:  number|string, triage_id:  number|string, hospital_id:  number|string, template_id: number|string) {
     return $axios
       .get(
         formUrl +
@@ -46,7 +46,7 @@ export default class request {
   }
 
   //   保存数据
-  static saveData (params) {
+  static saveData (params: object) {
     return $axios
       .patch(formUrl + '/api/v1/form_manage/data_info', params)
       .then(res => res.data)

@@ -1,11 +1,13 @@
 import config from '@/api/config'
 import $axios from '@/utils/request'
+import { PostData } from '@/api/interface'
+
 /*
   新版本api
 */
 
 // 获取科研列表
-export async function researchList (params) {
+export async function researchList (params: PostData) {
   return $axios({
     url: config.smaiuac_service_base_url + '/api/v2/user_research/research_list',
     method: 'get',
@@ -13,7 +15,7 @@ export async function researchList (params) {
   })
 }
 // 获取科研库详情
-export async function getResearch (params) {
+export async function getResearch (params: PostData) {
   return $axios({
     url: config.smaiuac_service_base_url + '/api/v2/user_research/get_research',
     method: 'get',
@@ -21,7 +23,7 @@ export async function getResearch (params) {
   })
 }
 // 添加科研库
-export async function addResearch (data) {
+export async function addResearch (data: PostData) {
   return $axios({
     url: config.smaiuac_service_base_url + '/api/v2/user_research/add_research',
     method: 'post',
@@ -29,7 +31,7 @@ export async function addResearch (data) {
   })
 }
 // 修改科研库
-export async function modifyResearch (data) {
+export async function modifyResearch (data: PostData) {
   return $axios({
     url: config.smaiuac_service_base_url + '/api/v2/user_research/modify_research',
     method: 'post',
@@ -38,7 +40,7 @@ export async function modifyResearch (data) {
 }
 
 // 删除科研库详情
-export async function delResearch (data) {
+export async function delResearch (data: PostData) {
   return $axios({
     url: config.smaiuac_service_base_url + '/api/v2/user_research/delete_research',
     method: 'post',
@@ -47,7 +49,7 @@ export async function delResearch (data) {
 }
 
 // 上传excel
-export async function uploadExcel (data) {
+export async function uploadExcel (data: PostData) {
   return $axios({
     url: config.smaifdef_service_base_url + '/api/v1/research/import_metas',
     method: 'post',
@@ -56,7 +58,7 @@ export async function uploadExcel (data) {
 }
 
 // 手动入组 添加数据到科研项目
-export async function addPatResearch (data) {
+export async function addPatResearch (data: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/research_manage/set_tags',
     method: 'patch',
@@ -64,7 +66,7 @@ export async function addPatResearch (data) {
   })
 }
 // 手动入组 删除科研数据
-export async function delPatResearch (data) {
+export async function delPatResearch (data: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/research_manage/unset_tags',
     method: 'patch',
@@ -73,7 +75,7 @@ export async function delPatResearch (data) {
 }
 
 // 自动入组条件 科研项目
-export async function addConditionResearch (data) {
+export async function addConditionResearch (data: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/research_manage/update_condition',
     method: 'patch',
@@ -81,7 +83,7 @@ export async function addConditionResearch (data) {
   })
 }
 // 获取自动入组条件 科研项目
-export async function getConditionResearch (params) {
+export async function getConditionResearch (params: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/research_manage/condition_info',
     method: 'get',
@@ -89,7 +91,7 @@ export async function getConditionResearch (params) {
   })
 }
 // 新增患者 科研项目
-export async function addPaticent (params) {
+export async function addPaticent (params: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/research_manage/condition_info',
     method: 'get',

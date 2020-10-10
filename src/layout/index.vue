@@ -1,26 +1,43 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+    <a-layout-sider
+      v-model="collapsed"
+      :trigger="null"
+      collapsible
+    >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" v-model="defaultActive">
+      <a-menu
+        v-model="defaultActive"
+        theme="dark"
+        mode="inline"
+      >
         <template v-for="(item,index) in newNavlist">
-              <a-menu-item v-if="!item.submenu" :key="item.path+index" class="me-item" :index="item.path">
-                <span >{{ item.cn }}</span>
-              </a-menu-item>
+          <a-menu-item
+            v-if="!item.submenu"
+            :key="item.path+index"
+            class="me-item"
+            :index="item.path"
+          >
+            <span>{{ item.cn }}</span>
+          </a-menu-item>
 
-              <a-sub-menu v-else :key="item.path+index" :index="item.path">
-                <template v-slot:title>
-                  <span >{{ item.cn }}</span>
-                </template>
-                <a-menu-item
-                  v-for="(item2,index2) in item.submenu"
-                  :key="item2.path+index2"
-                  class="submenu-item"
-                  :index="String(item2.id)"
-                >
-                  <span >{{ item2.cn }}</span>
-                </a-menu-item>
-              </a-sub-menu>
+          <a-sub-menu
+            v-else
+            :key="item.path+index"
+            :index="item.path"
+          >
+            <template #title>
+              <span>{{ item.cn }}</span>
+            </template>
+            <a-menu-item
+              v-for="(item2,index2) in item.submenu"
+              :key="item2.path+index2"
+              class="submenu-item"
+              :index="String(item2.id)"
+            >
+              <span>{{ item2.cn }}</span>
+            </a-menu-item>
+          </a-sub-menu>
         </template>
       </a-menu>
     </a-layout-sider>
@@ -31,12 +48,16 @@
           class="trigger"
           @click="() => (collapsed = !collapsed)"
         />
-        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
+        <menu-fold-outlined
+          v-else
+          class="trigger"
+          @click="() => (collapsed = !collapsed)"
+        />
       </a-layout-header>
       <a-layout-content
         :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
       >
-        <router-view></router-view>
+        <router-view />
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -47,9 +68,13 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined
 } from '@ant-design/icons-vue'
-import router from '@/router'
-import store from '@/store'
-import { getToken, getInfo, removeToken, removeInfo } from '@/utils/cookie'
+// import router from '@/router'
+// import store from '@/store'
+/* 
+removeToken
+removeInfo
+*/
+import { getToken, getInfo } from '@/utils/cookie'
 import storage from '@/utils/storage'
 
 import * as request from '@/api/home'

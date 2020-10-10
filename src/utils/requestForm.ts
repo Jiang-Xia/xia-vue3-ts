@@ -1,9 +1,9 @@
 import axios from 'axios'
 import Vue from 'vue'
-import { Message } from 'element-ui'
 import Cookies from 'js-cookie'
-import { openLoading, closeLoading } from '@/utils/loading'
 import request from '@/api/form'
+import { Message } from 'ant-design-vue'
+
 const $axios = axios.create({
   // 设置超时时间
   timeout: 60000
@@ -18,12 +18,10 @@ $axios.interceptors.request.use(
   async (config) => {
     const token = Cookies.get('form_token')
     if (config.url.includes('/api/v1/token/get_proxy_token')) {
-      openLoading()
       return config
     } else {
       if (token) {
         config.headers.Authorization = Cookies.get('token_type') + ' ' + Cookies.get('form_token')
-        openLoading()
         return config
       } else {
         const flag = await request.getToken().then(res => {
@@ -39,7 +37,6 @@ $axios.interceptors.request.use(
         })
         console.log(flag, 'new')
         if (flag) {
-          openLoading()
           config.headers.Authorization = Cookies.get('token_type') + ' ' + Cookies.get('form_token')
           return config
         }
@@ -58,7 +55,6 @@ $axios.interceptors.response.use(
   response => {
     const status = response.status
     const code = response.data.code
-    closeLoading()
     if ((status >= 200 && status < 300) || status === 304) {
       if (code === '00000') {
         return Promise.resolve(response.data)
@@ -72,7 +68,6 @@ $axios.interceptors.response.use(
     }
   },
   error => {
-    closeLoading()
     if (error.response) {
       switch (error.response.status) {
         case 400:

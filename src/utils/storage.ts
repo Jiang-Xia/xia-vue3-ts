@@ -1,8 +1,10 @@
 const SALT = ''
-
+interface JsonValue {
+  [propName: string]: string;
+}
 const storage = {
   local: {
-    get (key: any) {
+    get (key: string) {
       const strValue = localStorage.getItem(SALT + key)
       if (strValue && strValue !== 'undefined') {
         return JSON.parse(strValue)
@@ -10,11 +12,11 @@ const storage = {
         return null
       }
     },
-    set (key: any, jsonValue: any) {
+    set (key: string, jsonValue: JsonValue) {
       const strValue = JSON.stringify(jsonValue)
       localStorage.setItem(SALT + key, strValue)
     },
-    remove (key: any) {
+    remove (key: string) {
       localStorage.removeItem(SALT + key)
     },
     removeAll () {
@@ -22,7 +24,7 @@ const storage = {
     }
   },
   session: {
-    get (key: any) {
+    get (key: string) {
       const strValue = sessionStorage.getItem(SALT + key)
       if (strValue && strValue !== 'undefined') {
         return JSON.parse(strValue)
@@ -30,11 +32,11 @@ const storage = {
         return null
       }
     },
-    set (key: any, jsonValue: any) {
+    set (key: string, jsonValue: JsonValue) {
       const strValue = JSON.stringify(jsonValue)
       sessionStorage.setItem(SALT + key, strValue)
     },
-    remove (key: any) {
+    remove (key: string) {
       sessionStorage.removeItem(SALT + key)
     },
     removeAll () {

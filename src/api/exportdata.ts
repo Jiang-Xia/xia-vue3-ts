@@ -1,26 +1,9 @@
 import config from '@/api/config'
 import $axios from '@/utils/request'
-/*
-  新版本api
-*/
-
-/* 公共资源 接口 */
-export async function userResource (data = {}, type) {
-  const _data = {
-    word: '',
-    page: 1,
-    no_page: 1,
-    page_size: 20
-  }
-  return $axios({
-    url: config.smaiuac_service_base_url + '/api/v2/user_resource/' + type,
-    method: 'post',
-    data: Object.assign(_data, data)
-  })
-}
+import { ResearchData,PostData } from '@/api/interface'
 
 // 获取项目、科室、病种权限信息
-export async function searchKeywords (data) {
+export async function searchKeywords (data: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/quick_search',
     method: 'post',
@@ -29,7 +12,7 @@ export async function searchKeywords (data) {
 }
 
 // 获取keywordList
-export async function keywordList (params) {
+export async function keywordList (params: object) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/keywords_template',
     method: 'get',
@@ -38,7 +21,7 @@ export async function keywordList (params) {
 }
 
 // 导出任务
-export async function exportTask (data, method) {
+export async function exportTask (data: PostData, method: string) {
   if (method === 'get' || method === 'delete') {
     return $axios({
       url: config.smaiexport_service_base_url + '/api/v2/export/task',
@@ -48,14 +31,15 @@ export async function exportTask (data, method) {
   } else {
     return $axios({
       url: config.smaiexport_service_base_url + '/api/v2/export/task',
-      method: method,
+      method: 'post',
       data: data
     })
   }
+  
 }
 
 // 获取任务列表
-export async function taskList (data) {
+export async function taskList (data: PostData) {
   return $axios({
     url: config.smaiexport_service_base_url + '/api/v2/export/task_list',
     method: 'post',
@@ -64,10 +48,22 @@ export async function taskList (data) {
 }
 
 // 导出字段联想
-export async function associationAsync (data) {
+export async function associationAsync (data: PostData) {
   return $axios({
     url: config.smaidatasearch_service_base_url + '/api/v1/data_search/associate_search',
     method: 'post',
     data: data
+  })
+}
+// 获取结构化数据字段模板 科研个病种
+export async function getDetailTemplate (params: ResearchData) {
+  let url = config.smaifdef_service_base_url + '/api/v1/disease/meta_template'
+  if (params.research_id) {
+    url = config.smaifdef_service_base_url + '/api/v1/research/meta_template'
+  }
+  return $axios({
+    method: 'get',
+    url: url,
+    params: params
   })
 }

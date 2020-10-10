@@ -1,8 +1,26 @@
+interface Settings {
+  watermark_txt: string;
+  watermark_x: number; // 水印起始位置x轴坐标
+  watermark_y: number; // 水印起始位置Y轴坐标
+  watermark_rows: number; // 水印行数
+  watermark_cols: number; // 水印列数
+  watermark_x_space: number; // 水印x轴间隔
+  watermark_y_space: number; // 水印y轴间隔
+  watermark_color: string; // 水印字体颜色
+  watermark_alpha: number; // 水印透明度，小于等于0.003,不可恢复到水印。
+  watermark_fontsize: string; // 水印字体
+  watermark_font: string; // 水印字体
+  watermark_line_height: number; // 水印行高
+  watermark_width: number; // 水印宽度
+  watermark_height: number; // 水印长度
+  watermark_angle: number; // 水印倾斜度数
+  watermark_bg_alpha: number; // 加透明度导致隐形水印无法读取
+}
 function watermark (waterMarkTxt: string, className: string) { // 水印
-  let watermarkdivs = []
+  let watermarkdivs: [] = []
   // 加载水印
-  const loadMark = function (settings: any) {
-    const defaultSettings = {
+  const loadMark = function () {
+    const defaultSettings: Settings = {
       watermark_txt: waterMarkTxt,
       watermark_x: -2, // 水印起始位置x轴坐标
       watermark_y: 20, // 水印起始位置Y轴坐标
@@ -23,17 +41,13 @@ function watermark (waterMarkTxt: string, className: string) { // 水印
 
     }
     // 采用配置项替换默认值，作用类似jquery.extend
-    if (arguments.length === 1 && typeof arguments[0] === 'object') {
-      const src = arguments[0] || {}
-      for (const key in src) {
-        if (src[key] && defaultSettings[key] && src[key] === defaultSettings[key]) { continue } else if (src[key]) { defaultSettings[key] = src[key] }
-      }
-    }
-
     const oTemp = document.createDocumentFragment()
 
     if (watermarkdivs && watermarkdivs.length > 0) {
-      document.getElementsByClassName(className)[0].removeChild(document.getElementById('otdivid'))
+      const revDom = document.getElementById('otdivid')
+      if(revDom){
+        document.getElementsByClassName(className)[0].removeChild(revDom)
+      }
       watermarkdivs = []
     }
     let x
@@ -48,10 +62,6 @@ function watermark (waterMarkTxt: string, className: string) { // 水印
         mask_div.className = '_mask_div'
         // mask_div.appendChild(document.createTextNode(defaultSettings.watermark_txt));
         // 设置水印div倾斜显示
-        mask_div.style.webkitTransform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)'
-        mask_div.style.MozTransform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)'
-        mask_div.style.msTransform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)'
-        mask_div.style.OTransform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)'
         mask_div.style.transform = 'rotate(-' + defaultSettings.watermark_angle + 'deg)'
         mask_div.style.visibility = ''
         mask_div.style.position = 'fixed'
@@ -62,7 +72,7 @@ function watermark (waterMarkTxt: string, className: string) { // 水印
         mask_div.style.zIndex = '9'
         mask_div.style.pointerEvents = 'none'
         // mask_div.style.border="solid #eee 1px";
-        mask_div.style.opacity = defaultSettings.watermark_alpha
+        mask_div.style.opacity = String(defaultSettings.watermark_alpha)
         mask_div.style.fontSize = defaultSettings.watermark_fontsize
         mask_div.style.fontFamily = defaultSettings.watermark_font
         mask_div.style.color = defaultSettings.watermark_color
@@ -85,25 +95,28 @@ function watermark (waterMarkTxt: string, className: string) { // 水印
     }
   }
 
-  watermark.load = function (settings) {
+  watermark.load = function () {
     function del () {
       const divs = document.querySelectorAll('._mask_div')
       for (let i = 0; i < divs.length; i++) {
-        divs[i].parentNode.removeChild(divs[i])
+        const parent = divs[i].parentNode
+        if (parent) {
+          parent.removeChild(divs[i])
+        }
         console.log(divs[i].parentElement)
       }
     }
     del()
     window.onload = function () {
       del()
-      loadMark(settings)
+      loadMark()
     }
     window.onresize = function () {
       del()
-      loadMark(settings)
+      loadMark()
     }
     del()
-    loadMark(settings)
+    loadMark()
   }
   watermark.load({
     watermark_txt: waterMarkTxt
