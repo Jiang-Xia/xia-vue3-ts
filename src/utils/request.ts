@@ -5,11 +5,11 @@ import { getCode } from '@/utils/common'
 // import showXiaLogin from '@/components/xia-login/main'
 
 // import Vue from 'vue'
-import { Message } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
 
 function errorMsg (msg: string) {
-  Message.error({
-    message: msg,
+  message.error({
+    content: msg,
     duration: 1500
   })
 }

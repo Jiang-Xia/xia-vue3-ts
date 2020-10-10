@@ -4,13 +4,13 @@ export interface AnyProp {
 }
 const TokenKey = 'sys_token'
 const InfoKey = 'sys_info'
-let day = '' // 一天时间
+let day:number // 一天时间
 export function getToken () {
   return Cookies.get(TokenKey)
 }
 
 export function setToken (type: string, token: string, time: number) {
-  day = String(time / (1000 * 60 * 60 * 24)) // 一天时间
+  day = time / (1000 * 60 * 60 * 24) // 一天时间
   return Cookies.set(TokenKey, type + ' ' + token, { expires: day })
 }
 

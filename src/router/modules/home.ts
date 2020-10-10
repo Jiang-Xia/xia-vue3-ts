@@ -1,4 +1,4 @@
-import layout from '@/layout/index'
+import layout from '@/layout/index.vue'
 // activeMenu 用来高亮导航的参数
 const home = {
   path: '/home',
@@ -14,7 +14,7 @@ const home = {
       path: 'result-query',
       name: 'ResultQuery',
       props: true,
-      component: () => import('@/views/home/index'),
+      component: () => import('@/views/home/index.vue'),
       meta: {
         activeMenu: '/home'
       }
