@@ -4,7 +4,7 @@ export interface AnyProp {
 }
 const TokenKey = 'sys_token'
 const InfoKey = 'sys_info'
-let day:number // 一天时间
+let day: number // 一天时间
 export function getToken () {
   return Cookies.get(TokenKey)
 }

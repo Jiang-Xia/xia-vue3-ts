@@ -1,5 +1,5 @@
 
- BASECONFIG = {
+ Window.BASECONFIG = {
   smaiodcs_service_base_url: 'https://smaiodcs.api1.deepaint.cn',
   smaimanagement_service_base_url: 'https://smaimanagement.api1.deepaint.cn',
   smaidatasearch_service_base_url: 'https://smaidatasearch.api1.deepaint.cn',

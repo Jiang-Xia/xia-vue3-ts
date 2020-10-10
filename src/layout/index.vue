@@ -80,8 +80,19 @@ import storage from '@/utils/storage'
 import * as request from '@/api/home'
 import { globalConfigs } from '@/api/common'
 import { Options, Vue } from 'vue-class-component'
-
-const navlist = [
+interface NavlistInter {
+  path: string;
+  icon: string;
+  cn: string;
+  submenu?: any[];
+}
+interface SubmenuInter {
+  path: string;
+  id: string;
+  icon: string;
+  cn: string;
+}
+const navlist: NavlistInter[] = [
   {
     path: '/home',
     icon: 'el-icon-location',
@@ -91,7 +102,7 @@ const navlist = [
     path: '/diseases',
     icon: 'el-icon-menu',
     cn: '专病数据',
-    submenu: []
+    submenu:[]
   },
   {
     path: '/export',
@@ -138,16 +149,16 @@ export default class DefaultLayout extends Vue {
   // 导航列表
   get newNavlist () {
     const list = this.navlist
-    const plist = this.disease_list
+    const plist: any[] = this.disease_list
     // console.log(plist)
     const token = 'getToken()'
     if (!token) {
       return list.filter(v => v.path === '/home')
     } else {
       return list.map(v => {
-        if (v.path === '/diseases') {
+        if (v.path === '/diseases'&&plist.length) {
           v.submenu = plist.map(v2 => {
-            const obj = {
+            const obj: SubmenuInter = {
               path: '/diseases/result-query?disease_id=' + String(v2.disease_id),
               id: v2.disease_id,
               icon: 'el-icon-document',
