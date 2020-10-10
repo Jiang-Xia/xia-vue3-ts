@@ -1,14 +1,7 @@
-// import { Config } from '@/api/interface'
+import { Config } from '@/api/interface'
 import Vue from 'vue'
 import VueRouter, { Route } from 'vue-router'
 import { Store } from 'vuex'
-declare global{
-  interface Window {
-    BASECONFIG: Config = {};
-    baseFontSize: number;
-  }
-}
-
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
@@ -37,4 +30,9 @@ declare module 'js-cookie' {
 declare module 'ant-design-vue' {
   import * as ant from 'ant-design-vue'
   export default ant
+}
+
+interface Window {
+  BASECONFIG: Config;
+  baseFontSize: number;
 }
