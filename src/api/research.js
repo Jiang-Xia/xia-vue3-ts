@@ -1,5 +1,5 @@
 import config from '@/api/config'
-import $axios from '@/utils/request.js'
+import $axios from '@/utils/request'
 /*
   新版本api
 */

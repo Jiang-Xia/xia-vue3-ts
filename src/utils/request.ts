@@ -1,14 +1,13 @@
 import axios from 'axios'
 import router from '@/router/'
-import { closeLoading } from '@/utils/loading'
 import { getToken, removeToken, removeInfo } from '@/utils/cookie'
 import { getCode } from '@/utils/common'
-// import showXiaLogin from '@/components/xia-login/main.js'
+// import showXiaLogin from '@/components/xia-login/main'
 
 // import Vue from 'vue'
 import { Message } from 'ant-design-vue'
 
-function errorMsg (msg) {
+function errorMsg(msg:string) {
   Message.error({
     message: msg,
     duration: 1500
@@ -46,7 +45,6 @@ $axios.interceptors.response.use(
       if (code === '00000') {
         return Promise.resolve(response.data)
       } else {
-        closeLoading()
         errorMsg(response.data.msg)
         return Promise.reject(new Error(response.data || 'Error'))
       }
@@ -55,7 +53,6 @@ $axios.interceptors.response.use(
     }
   },
   error => {
-    closeLoading()
     if (error.response) {
       const data = error.response && error.response.data
       switch (error.response.status) {
@@ -81,10 +78,7 @@ $axios.interceptors.response.use(
               // showXiaLogin()
             }
           } else {
-            Message({
-              message: data.msg,
-              type: 'error'
-            })
+            errorMsg(data.msg)
           }
           break
         case 404:

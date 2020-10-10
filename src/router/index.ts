@@ -6,17 +6,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: '/',
     redirect: '/home'
-  },
-  {
-    path: '/index',
-    name: 'Index',
-    component: '',
-    props: true,
-    meta: {
-      title: '首页',
-      role: 'normal'
-    }
-  },
+  }
+  // {
+  //   path: '/index',
+  //   name: 'Index',
+  //   component: '',
+  //   props: true,
+  //   meta: {
+  //     title: '首页',
+  //     role: 'normal'
+  //   }
+  // },
   home
 ]
 

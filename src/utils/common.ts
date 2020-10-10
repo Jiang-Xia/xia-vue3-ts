@@ -30,7 +30,7 @@ export const getSiteTitle = function() {
   }
 }
 // 切换路由设置title
-export function getPageTitle(pageTitle) {
+export function getPageTitle(pageTitle:string) {
   const title = getSiteTitle() || '数据平台'
   if (pageTitle) {
     return `${pageTitle} - ${title}`

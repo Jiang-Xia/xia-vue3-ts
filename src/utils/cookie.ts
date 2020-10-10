@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+
 const TokenKey = 'sys_token'
 const InfoKey = 'sys_info'
 let day = '' // 一天时间
@@ -6,8 +7,8 @@ export function getToken() {
   return Cookies.get(TokenKey)
 }
 
-export function setToken(type, token, time) {
-  day = time / (1000 * 60 * 60 * 24) // 一天时间
+export function setToken(type:string, token:string, time:number) {
+  day = String(time / (1000 * 60 * 60 * 24)) // 一天时间
   return Cookies.set(TokenKey, type + ' ' + token, { expires: day })
 }
 
@@ -22,7 +23,7 @@ export function getInfo() {
   }
 }
 
-export function setInfo(userData) {
+export function setInfo(userData:any) {
   // console.log(userData);
   return Cookies.set(InfoKey, userData, { expires: day })
 }

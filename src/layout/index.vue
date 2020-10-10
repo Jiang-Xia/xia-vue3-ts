@@ -55,6 +55,7 @@ import storage from '@/utils/storage'
 import * as request from '@/api/home'
 import { globalConfigs } from '@/api/common'
 import { Options, Vue } from 'vue-class-component'
+
 const navlist = [
   {
     path: '/home',
@@ -149,7 +150,7 @@ export default class DefaultLayout extends Vue {
   created () {
     const info = getInfo()
     const token = getToken()
-    globalConfigs().then(res => {
+    globalConfigs().then((res) => {
       const config = res.data
       storage.local.set('global_config', res.data)
       document.title = config.site_config.global_site_title
@@ -158,7 +159,7 @@ export default class DefaultLayout extends Vue {
     // console.log(info)
     if (token) {
       this.truename = info.truename
-      request.userResource({}, 'disease_list').then(res => {
+      request.userResource({}, 'disease_list').then((res) => {
         this.disease_list = res.data.result.disease_list
       })
     }

@@ -2,7 +2,7 @@ const SALT = ''
 
 const storage = {
   local: {
-    get (key) {
+    get(key:any) {
       const strValue = localStorage.getItem(SALT + key)
       if (strValue && strValue !== 'undefined') {
         return JSON.parse(strValue)
@@ -10,19 +10,19 @@ const storage = {
         return null
       }
     },
-    set (key, jsonValue) {
+    set(key:any, jsonValue:any) {
       const strValue = JSON.stringify(jsonValue)
       localStorage.setItem(SALT + key, strValue)
     },
-    remove (key) {
+    remove(key:any) {
       localStorage.removeItem(SALT + key)
     },
-    removeAll () {
+    removeAll() {
       localStorage.clear()
     }
   },
   session: {
-    get (key) {
+    get(key:any) {
       const strValue = sessionStorage.getItem(SALT + key)
       if (strValue && strValue !== 'undefined') {
         return JSON.parse(strValue)
@@ -30,14 +30,14 @@ const storage = {
         return null
       }
     },
-    set (key, jsonValue) {
+    set(key:any, jsonValue:any) {
       const strValue = JSON.stringify(jsonValue)
       sessionStorage.setItem(SALT + key, strValue)
     },
-    remove (key) {
+    remove(key:any) {
       sessionStorage.removeItem(SALT + key)
     },
-    removeAll () {
+    removeAll() {
       sessionStorage.clear()
     }
   }

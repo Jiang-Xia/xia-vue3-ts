@@ -1,5 +1,5 @@
-import $axios from '@/utils/requestForm.js'
-import config from '@/api/config.js'
+import $axios from '@/utils/requestForm'
+import config from '@/api/config'
 let formUrl
 export default class request {
   // 获取新token

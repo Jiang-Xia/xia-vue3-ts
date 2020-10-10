@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { Message } from 'element-ui'
 import Cookies from 'js-cookie'
 import { openLoading, closeLoading } from '@/utils/loading'
-import request from '@/api/form.js'
+import request from '@/api/form'
 const $axios = axios.create({
   // 设置超时时间
   timeout: 60000

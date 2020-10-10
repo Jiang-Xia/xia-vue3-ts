@@ -1,5 +1,5 @@
 import config from '@/api/config'
-import $axios from '@/utils/request.js'
+import $axios from '@/utils/request'
 
 // 获取项目、科室、病种权限信息
 export async function searchKeywords(data) {

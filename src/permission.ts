@@ -1,13 +1,11 @@
 import router from '@/router'
-// import store from '@/store'
-// import { Message } from 'element-ui'
-import { getToken } from '@/utils/cookie' // get token from cookie
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
+import { getToken } from '@/utils/cookie'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css' 
 import { getPageTitle } from '@/utils/common'
-// import showXiaLogin from '@/components/xia-login/main.js'
+// import showXiaLogin from '@/components/xia-login/main'
 // const whiteList = ['/home', '/index', '/paticent']
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   // next函数 进行管道中的一个钩子，如果执行完了，则导航的状态就是 confirmed （确认的）；否则为false，终止导航。
   const hasToken = getToken()
   const role = to.meta.role

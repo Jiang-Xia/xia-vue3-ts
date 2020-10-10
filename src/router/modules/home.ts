@@ -14,7 +14,7 @@ const home = {
       path: 'result-query',
       name: 'ResultQuery',
       props: true,
-      component:() => import('@/views/home/index'),
+      component: () => import('@/views/home/index'),
       meta: {
         activeMenu: '/home'
       }

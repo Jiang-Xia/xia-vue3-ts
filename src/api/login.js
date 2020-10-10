@@ -1,4 +1,4 @@
-import $axios from '@/utils/request.js'
+import $axios from '@/utils/request'
 import config from '@/api/config'
 
 export const handleLogin = async(data) => {
