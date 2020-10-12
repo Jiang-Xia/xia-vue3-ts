@@ -9,8 +9,8 @@
         {{ sysTitle }}
       </div>
       <a-menu
-        v-model="defaultActive"
         :inline-collapsed="collapsed"
+        :selected-keys="[defaultActive]"
         theme="dark"
         mode="inline"
         @select="handleSelect"
@@ -35,9 +35,8 @@
             </template>
             <a-menu-item
               v-for="(item2,index2) in item.submenu"
-              :key="item2.path"
+              :key="String(item2.id)"
               class="submenu-item"
-              :index="String(item2.id)"
             >
               <span>{{ item2.cn }}</span>
             </a-menu-item>
@@ -197,6 +196,14 @@ export default class DefaultLayout extends Vue {
     }
     
   }
+  get openKeys(){
+    const path = this.$route.meta.activeMenu
+    if (path === '/diseases') {
+        return [this.$route.query.disease_id]
+      } else {
+        return [path]
+      }
+  }
 
   created () {
     const info = getInfo()
@@ -216,8 +223,8 @@ export default class DefaultLayout extends Vue {
     }
   }
   // 点击菜单回调
-  handleSelect({ item={}, key ='', keyPath=[] }) {
-      // console.log(item,key, keyPath)
+  handleSelect({ item={}, key ='', keyPath=[],selectedKeys=[] }) {
+      console.log(item,key, keyPath,selectedKeys)
       // 切换导航清空条件
       const list_: Array<any> = this.disease_list
       // console.log(this.$route.name);
@@ -230,7 +237,7 @@ export default class DefaultLayout extends Vue {
         }
       }
       this.search_condition([])
-      if (keyPath.length === 2 && keyPath[0] === '/diseases') {
+      if (!isNaN(Number(key))) {
         this.selectDiseaseId = key
         this.$router.push({
           path: '/diseases/result-query',
