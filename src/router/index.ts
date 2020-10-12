@@ -1,5 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import home from '@/router/modules/home'
+import Home from '@/router/modules/home'
+import Disease from '@/router/modules/diseases'
+import Export from '@/router/modules/export'
+import Profile from '@/router/modules/profile'
+import Research from '@/router/modules/research'
+
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,7 +22,11 @@ const routes: Array<RouteRecordRaw> = [
   //     role: 'normal'
   //   }
   // },
-  home
+  Home,
+  Disease,
+  Export,
+  Profile,
+  Research
 ]
 
 const router = createRouter({

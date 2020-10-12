@@ -1,20 +1,24 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider
-      v-model="collapsed"
+      :collapsed="collapsed"
       :trigger="null"
       collapsible
     >
-      <div class="logo" />
+      <div class="logo ellipsis">
+        {{ sysTitle }}
+      </div>
       <a-menu
         v-model="defaultActive"
+        :inline-collapsed="collapsed"
         theme="dark"
         mode="inline"
+        @select="handleSelect"
       >
         <template v-for="(item,index) in newNavlist">
           <a-menu-item
             v-if="!item.submenu"
-            :key="item.path+index"
+            :key="item.path"
             class="me-item"
             :index="item.path"
           >
@@ -23,7 +27,7 @@
 
           <a-sub-menu
             v-else
-            :key="item.path+index"
+            :key="item.path"
             :index="item.path"
           >
             <template #title>
@@ -31,7 +35,7 @@
             </template>
             <a-menu-item
               v-for="(item2,index2) in item.submenu"
-              :key="item2.path+index2"
+              :key="item2.path"
               class="submenu-item"
               :index="String(item2.id)"
             >
@@ -68,8 +72,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined
 } from '@ant-design/icons-vue'
-// import router from '@/router'
-// import store from '@/store'
+import router from 'vue-router'
 /* 
 removeToken
 removeInfo
@@ -80,6 +83,13 @@ import storage from '@/utils/storage'
 import * as request from '@/api/home'
 import { globalConfigs } from '@/api/common'
 import { Options, Vue } from 'vue-class-component'
+import {
+  State,
+  Getter,
+  Action,
+  Mutation,
+  namespace
+} from 'vuex-class'
 interface NavlistInter {
   path: string;
   icon: string;
@@ -140,12 +150,15 @@ const navlist: NavlistInter[] = [
   }
 })
 export default class DefaultLayout extends Vue {
+  // 获取vuex中的home模块
+  @Mutation('home/search_condition') search_condition: any
   selectedKeys = ['1']
   collapsed = false
   navlist = navlist
   truename = ''
   sysTitle = ''
   disease_list= []
+  selectDiseaseId= ''
   // 导航列表
   get newNavlist () {
     const list = this.navlist
@@ -176,11 +189,13 @@ export default class DefaultLayout extends Vue {
   get defaultActive () {
     console.log(this.$route.meta)
     const path = this.$route.meta.activeMenu
+    console.log(path);
     if (path === '/diseases') {
       return this.$route.query.disease_id
     } else {
       return path
     }
+    
   }
 
   created () {
@@ -200,6 +215,37 @@ export default class DefaultLayout extends Vue {
       })
     }
   }
+  // 点击菜单回调
+  handleSelect({ item={}, key ='', keyPath=[] }) {
+      // console.log(item,key, keyPath)
+      // 切换导航清空条件
+      const list_: Array<any> = this.disease_list
+      // console.log(this.$route.name);
+      
+      if (this.$route.name === 'DiseaseQuery') {
+        const list = list_.filter(v => String(v.disease_id) === key)
+        if (list.length) {
+          this.$route.meta.title = list[0].disease_name
+          // console.log(this.$route.meta.title)
+        }
+      }
+      this.search_condition([])
+      if (keyPath.length === 2 && keyPath[0] === '/diseases') {
+        this.selectDiseaseId = key
+        this.$router.push({
+          path: '/diseases/result-query',
+          query: {
+            disease_id: key
+          }
+        })
+        this.$emit('click-specific', 1)
+      } else {
+        this.$router.push({
+          path: key
+        })
+      }
+      return
+    }
 }
 </script>
 <style scoped lang="scss">
@@ -219,6 +265,10 @@ export default class DefaultLayout extends Vue {
     height: 32px;
     background: rgba(255, 255, 255, 0.2);
     margin: 16px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 32px;
+    color: #fff;
   }
 }
 </style>

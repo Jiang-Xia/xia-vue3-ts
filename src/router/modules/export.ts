@@ -1,24 +1,23 @@
 import layout from '@/layout/index.vue'
 // activeMenu 用来高亮导航的参数
-const Home = {
-  path: '/home',
-  name: 'Home',
+const Export = {
+  path: '/export',
+  name: 'Export',
   component: layout,
-  redirect: { path: '/home/result-query' },
+  redirect: { path: '/export/result-query' },
   meta: {
-    title: '基础数据'
+    title: '数据导出'
     // role: 'normal'
   },
   children: [
     {
       path: 'result-query',
-
       props: true,
-      component: () => import('@/views/home/index.vue'),
+      component: () => import('@/views/export/index.vue'),
       meta: {
-        activeMenu: '/home'
+        activeMenu: '/export'
       }
     }
   ]
 }
-export default Home
+export default Export
