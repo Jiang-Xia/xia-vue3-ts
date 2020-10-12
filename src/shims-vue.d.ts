@@ -31,8 +31,10 @@ declare module 'ant-design-vue' {
   import * as ant from 'ant-design-vue'
   export default ant
 }
-
-interface Window {
-  BASECONFIG: Config;
-  baseFontSize: number;
+// 扩展全局变量 即在window对象新增属性
+declare global{
+  interface Window{
+    BASECONFIG: Config;
+    baseFontSize: number;
+  }
 }
