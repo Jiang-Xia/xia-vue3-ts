@@ -1,19 +1,50 @@
 <template>
   <div class="index-container">
-    home
+    {{ msg1 }}
+    <!-- {{ msg2 }} -->
+    {{ msg3 }}
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-
+import { Options,Component, Vue } from 'vue-class-component'
+// import { Vue, Component, Prop } from 'vue-property-decorator'
+// import { defineComponent, ref } from 'vue'
 @Options({
   props: {
-    msg: String
-  }
+  },
+  data(){
+    return{
+      msg1:'msg1'
+    }
+  },
+  // setup(props){
+  //   const msg2 = 'msg2'
+  //   console.log(props)
+  //   return {
+  //     msg2
+  //   }
+  // },
+  created(){
+    console.log(111111111)
+  },
+  // methods:{
+  //   init(){
+  //     console.log(this.msg1)
+  //   }
+  // }
 })
+@Component
 export default class HelloWorld extends Vue {
-  msg!: string
+  msg3= 'msg3'
+  init(){
+      console.log(this.msg3)
+  }
+  created(){
+    console.log(this)
+    this.init()
+    console.log(33333)
+  }
 }
 </script>
 <style scoped lang="scss">

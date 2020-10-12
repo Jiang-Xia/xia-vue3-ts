@@ -186,9 +186,9 @@ export default class DefaultLayout extends Vue {
 
   // 选中高亮
   get defaultActive () {
-    console.log(this.$route.meta)
+    // console.log(this.$route.meta)
     const path = this.$route.meta.activeMenu
-    console.log(path);
+    // console.log(path);
     if (path === '/diseases') {
       return this.$route.query.disease_id
     } else {
@@ -224,7 +224,7 @@ export default class DefaultLayout extends Vue {
   }
   // 点击菜单回调
   handleSelect({ item={}, key ='', keyPath=[],selectedKeys=[] }) {
-      console.log(item,key, keyPath,selectedKeys)
+      // console.log(item,key, keyPath,selectedKeys)
       // 切换导航清空条件
       const list_: Array<any> = this.disease_list
       // console.log(this.$route.name);
