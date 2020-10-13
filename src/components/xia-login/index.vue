@@ -1,68 +1,27 @@
 <template>
   <a-modal
-    title="登录"
+    v-if="loginVisible"
+    v-model="loginVisible.value"
     :visible="loginVisible"
-    :close-on-click-modal="false"
-    class="xia-dialog-login"
-    width="400px"
-    :modal="true"
+    :title="title"
+    @ok="tologinForm"
+    @cancel="handleCancel"
   >
-    <a-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginrules"
-      class="loginForm"
-    >
-      <a-form-item
-        prop="username"
-        class="me-item"
-      >
-        <div class="xia-item">
-          <i class="fas fa-user mg-r-10" />
-          <a-input
-            v-model="loginForm.username"
-            class="inline"
-            type="username"
-            autocomplete="on"
-          />
-        </div>
-      </a-form-item>
-      <a-form-item
-        prop="password"
-        class="me-item"
-      >
-        <div class="xia-item">
-          <i class="fas fa-lock mg-r-10" />
-          <a-input
-            v-model="loginForm.password"
-            class="inline"
-            type="password"
-            autocomplete="on"
-            @keydown.native.enter="tologinForm('loginForm')"
-          />
-        </div>
-      </a-form-item>
-    </a-form>
-    <span
-      slot="footer"
-      class="dialog-footer"
-    >
-      <!-- <a-button @click="loginVisible = false">取 消</a-button> -->
-      <a-button
-        type="primary"
-        @click="tologinForm('loginForm')"
-      >登 录</a-button>
-    </span>
+    <p>{{ ModalText }}</p>
   </a-modal>
 </template>
-<script>
+<script lang="ts">
 import store from '@/store'
 import { Options, Vue } from 'vue-class-component'
 @Options({
-  data() {
+
+})
+export default class XiaLogin extends Vue {
+    data() {
     return {
       token: '',
-      loginVisible: false,
+      title:'登录',
+      loginVisible : false,
       loginForm: {
         username: '',
         password: '',
@@ -73,22 +32,26 @@ import { Options, Vue } from 'vue-class-component'
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      }
+      },
+      ModalText:'ModalText'
     }
-  },
-  methods: {
-    async init() {
-      this.loginTypeHandle()
-    },
-    showXiaLogin(option = {}) {
+  }
+  static init(){
+    this.loginVisible =  true;
+    console.log('init',this.loginVisible);
+  }
+   showXiaLogin(option = {}) {
       this.init()
-    },
+    }
     hideXiaLogin() {
       this.loginVisible = false
-    },
+    }
     destory() {
       this.$destroy()
-    },
+    }
+    handleCancel(){
+      this.loginVisible = false
+    }
     /* 登录方式控制 */
     loginTypeHandle() {
       const code = this.$getCode()
@@ -102,7 +65,7 @@ import { Options, Vue } from 'vue-class-component'
           this.loginVisible = true
           break
       }
-    },
+    }
     /* 登录回调 */
     tologinForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -125,10 +88,6 @@ import { Options, Vue } from 'vue-class-component'
         }
       })
     }
-  }
-})
-export default class XiaLogin extends Vue {
-
 }
 </script>
 <style scoped lang="scss">
