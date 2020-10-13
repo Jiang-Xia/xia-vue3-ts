@@ -1,3 +1,3 @@
 import { Vue } from 'vue-class-component'
-import XiaLogin from './index.jsx'
+import XiaLogin from './index'
 export default XiaLogin
