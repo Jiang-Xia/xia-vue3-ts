@@ -8,6 +8,15 @@ import Research from '@/router/modules/research'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index-transfer.vue'),
+    meta: {
+      title: '登录',
+      role: 'normal'
+    }
+  },
+  {
     path: '/',
     name: '/',
     redirect: '/home'

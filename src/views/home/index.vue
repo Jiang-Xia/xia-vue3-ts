@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { Options,Component, Vue } from 'vue-class-component'
+import { Options, Vue } from 'vue-class-component'
 // import { Vue, Component, Prop } from 'vue-property-decorator'
 // import { defineComponent, ref } from 'vue'
 @Options({
@@ -34,7 +34,6 @@ import { Options,Component, Vue } from 'vue-class-component'
   //   }
   // }
 })
-@Component
 export default class HelloWorld extends Vue {
   msg3= 'msg3'
   init(){
