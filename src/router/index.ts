@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/login/index-transfer.vue'),
+    component: () => import('@/views/login/index-default.vue'),
     meta: {
       title: '登录',
       role: 'normal'

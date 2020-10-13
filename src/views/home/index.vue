@@ -3,14 +3,19 @@
     {{ msg1 }}
     <!-- {{ msg2 }} -->
     {{ msg3 }}
+    <ShowXiaLogin />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import ShowXiaLogin from '@/components/xia-login/main'
+
 // import { Vue, Component, Prop } from 'vue-property-decorator'
 // import { defineComponent, ref } from 'vue'
 @Options({
+  // components(){
+  // },
   props: {
   },
   data(){

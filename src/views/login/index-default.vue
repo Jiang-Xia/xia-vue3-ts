@@ -30,78 +30,57 @@
     >
 
     <section class="login-content center">
-      <el-form
+      <a-form
         ref="loginForm"
         :model="loginForm"
         :rules="loginrules"
         class="loginForm"
       >
-        <el-form-item prop="username">
-          <i class="el-icon-user" />
-          <el-input
+        <a-form-item prop="username">
+          <i class="a-icon-user" />
+          <a-input
             v-model="loginForm.username"
             type="username"
             auto-complete="on"
           />
-        </el-form-item>
-        <el-form-item prop="password">
-          <i class="el-icon-lock" />
-          <el-input
+        </a-form-item>
+        <a-form-item prop="password">
+          <i class="a-icon-lock" />
+          <a-input
             v-model="loginForm.password"
             type="password"
             auto-complete="on"
             @keydown.native.enter="tologinForm('loginForm')"
           />
-        </el-form-item>
-        <el-form-item>
-          <el-button
+        </a-form-item>
+        <a-form-item>
+          <a-button
             class="loginbutton"
             type="primary"
             @click="tologinForm('loginForm')"
           >
             登录
-          </el-button>
-        </el-form-item>
-      </el-form>
+          </a-button>
+        </a-form-item>
+      </a-form>
     </section>
   </div>
 </template>
 
 <script lang="ts">
 import { getSiteTitle } from '@/utils/common'
-export default {
+import { Options,Vue } from 'vue-class-component'
+Options({
   data() {
     return {
-      loginForm: {
-        username: '',
-        password: '',
-        grant_type: 'password'
-      },
-      loginrules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      },
-      title: getSiteTitle()
     }
-  },
-  watch: {
-    // $route: {
-    //   handler: function(route) { //   重定向至上次退出登录之前停留的页面
-    //     const query = route.query
-    //     if (query) {
-    //       this.redirect = query.redirect
-    //       this.otherQuery = this.getOtherQuery(query)
-    //     }
-    //   },
-    //   immediate: true
-    // }
   },
   methods: {
     /* 登录回调 */
-    tologinForm(formName) {
-      this.$refs[formName].validate(valid => {
+    tologinForm(formName: string) {
+      this.$refs[formName].validate((valid: boolean) => {
         if (valid) {
-          this.$store.dispatch('user/login', this.loginForm).then(async res => {
+          this.$store.dispatch('user/login', this.loginForm).then(async (res=null) => {
             if (res) {
               // 重定向或者首页
               this.$message.success('登录成功')
@@ -128,27 +107,42 @@ export default {
     //   }, {})
     // }
   }
+})
+export default class LoginDefault extends Vue{
+    loginForm= {
+        username: '',
+        password: '',
+        grant_type: 'password'
+    }
+    loginrules= {
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+      }
+    title= getSiteTitle()
+  created(){
+    console.log(this.data)
+  }
 }
 </script>
 
 <style lang="scss">
 @import "~@/styles/scss/_mixins";
 .login-container{
-  .el-input{
+  .a-input{
     width: 80%;
     line-height: 40px;
   }
-  .el-form-item__content{
+  .a-form-item__content{
     display: flex;
     justify-content: center;
   }
-  .el-form-item{
+  .a-form-item{
     margin-top: 2rem;
   }
-  .el-form-item__error{
+  .a-form-item__error{
     left: 80px;
   }
-  .el-icon-user,.el-icon-lock{
+  .a-icon-user,.a-icon-lock{
     line-height: 40px;
     font-size: 26px;
     text-align: center;

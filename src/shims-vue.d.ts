@@ -2,7 +2,7 @@ import { Config } from '@/api/interface'
 import Vue from 'vue'
 import VueRouter, { Route } from 'vue-router'
 import { Store } from 'vuex'
-
+import {getCode} from '@/utils/common'
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   const component: DefineComponent
@@ -13,6 +13,7 @@ declare module 'vue/types/vue' {
     $router: VueRouter;
     $route: Route;
     $store: Store;
+    $getCode:getCode;
     // 以下是在main.ts中挂载到Vue.prototype上的变量
     // $api: any;
     // $mock: any;
