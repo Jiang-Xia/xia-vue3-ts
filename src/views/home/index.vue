@@ -89,6 +89,7 @@ export default class Home extends Vue {
   @Watch('nativeInput')
   onNativeInputChanged(n: string, o: string) {
     console.log(n,o);
+    // 改名
   }
   created(){
     this.init()
