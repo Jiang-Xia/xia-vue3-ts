@@ -1,4 +1,4 @@
-# xia-vue3
+# xia-vue3-ts
 
 ## Project setup
 ```
